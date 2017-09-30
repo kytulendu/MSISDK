@@ -1,0 +1,42 @@
+Cube Rotation Controls:
+~~~~~~~~~~~~~~~~~~~~~~~
+F1     : Set Rotation in X-Axis AntiClockwise.
+F2     : Set Rotation in X-Axis OFF.
+F3     : Set Rotation in X-Axis Clockwise.
+
+F4     : Set Rotation in Y-Axis AntiClockwise.
+F5     : Set Rotation in Y-Axis OFF.
+F6     : Set Rotation in Y-Axis Clockwise.
+
+F7     : Set Rotation in Z-Axis Anticlockwise.
+F8     : Set Rotation in Z-Axis OFF.
+F9     : Set Rotation in Z-Axis Clockwise.
+
+ENTER  : Toggle Bus Mastering ON/OFF.
+
+UP     : Enlarge the Cube.
+DOWN   : Shrink  the Cube.
+
+HOME   : Run Demo for 2 spins (Clockwise in all axis) - Many Calculations.
+       : The above really shows off the speed difference with BUS-MASTERING.	
+       : This is because the CPU is very busy in doing many calculation while
+       : the BUS-MASTERING of the board is taking place concurrently. 		 
+END    : Run Demo for 2 spins (Clockwise in all axis) - Maximum Speed.
+       : Since there are very few CPU calculations with this case, the
+       : BUS-MASTERING doesn't do much for frame rate.
+
+SPACE  : Pause on a Frame.
+TAB    : Restart Cube Motion from initial position.
+
+INSERT : Set Gourad Shading mode.
+DELETE : Set Texture Mapping mode.
+
+
+The Displayed Data:
+~~~~~~~~~~~~~~~~~~~
+FPS -> displayed on the Top Right Corner.
+
+Rotation about each Axis -> Bottom Left.
+
+Bus Mastering Status -> Bottom Right.
+

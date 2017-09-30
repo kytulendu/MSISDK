@@ -1,0 +1,13 @@
+The valid keystrokes for the different tests are:
+
+'1'	: Loads textures into the Texture Cache via a Heap method.
+'2'	: Loads textures into the Texture Cache via a System Memory
+	  method.
+'3'	: Loads textures into the Texture Cache via a Direct Frame
+	  Buffer Access method.
+'4'	: Shows how to use LUT4 textures.
+'8'	: Shows how to use LUT8 textures.
+'L','l'	: Draws lines.
+'T','t'	: Shows some of the many possible texture mapping types.
+'U','u'	: Shows more concepts of texture mapping.
+
