@@ -39,4 +39,3 @@ FPS -> displayed on the Top Right Corner.
 Rotation about each Axis -> Bottom Left.
 
 Bus Mastering Status -> Bottom Right.
-

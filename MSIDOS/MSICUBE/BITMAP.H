@@ -1,6 +1,6 @@
-//
-// Header file containing some BMP file information structures and defines 
-//
+/*
+*  Header file containing some BMP file information structures and defines
+*/
 
 /* constants for the biCompression field */
 #define BI_RGB      0L
@@ -9,8 +9,7 @@
 
 #define BI_BITFIELDS  3L
 
-typedef struct tagBITMAPINFOHEADER
-{
+typedef struct tagBITMAPINFOHEADER {
     DWORD   biSize;
     LONG    biWidth;
     LONG    biHeight;
@@ -24,15 +23,13 @@ typedef struct tagBITMAPINFOHEADER
     DWORD   biClrImportant;
 } BITMAPINFOHEADER;
 
-typedef struct tagBITMAPFILEHEADER
-{
-//    UINT    bfType;
+typedef struct tagBITMAPFILEHEADER {
+    /*UINT    bfType;*/
     WORD    bfType;
     DWORD   bfSize;
-//    UINT    bfReserved1;
+    /*UINT    bfReserved1;*/
     WORD    bfReserved1;
-//    UINT    bfReserved2;
+    /*UINT    bfReserved2;*/
     WORD    bfReserved2;
     DWORD   bfOffBits;
 } BITMAPFILEHEADER;
-

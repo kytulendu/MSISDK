@@ -10,4 +10,3 @@ The valid keystrokes for the different tests are:
 'L','l'	: Draws lines.
 'T','t'	: Shows some of the many possible texture mapping types.
 'U','u'	: Shows more concepts of texture mapping.
-

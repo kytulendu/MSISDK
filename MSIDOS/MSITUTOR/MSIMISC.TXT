@@ -4,4 +4,3 @@ The valid keystrokes for the different tests are:
 'X','x'	: Draws ZPlanes WITHOUT Z-buffer comparisons.
 'G','g'	: Shows API calls described as 'General State Change'.
 'B','b' : Shows Bit Blits
-

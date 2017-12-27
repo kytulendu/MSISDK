@@ -55,7 +55,3 @@ $(NAME).obj : $(NAME).c
               if exist $@ del $@
 	      $(CC) $(CFLAGS) $(NAME).c
 
-
-
-
-

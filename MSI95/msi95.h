@@ -36,8 +36,8 @@
 //
 typedef struct _T_msiInfo
    {
-   SHORT  VersionMajor;    
-   SHORT  VersionMinor;   
+   SHORT  VersionMajor;
+   SHORT  VersionMinor;
 
    struct //_msiColor
       {
@@ -57,7 +57,7 @@ typedef struct _T_msiInfo
       } msiColor;
 
    struct //_msiDepth
-      { 
+      {
       LONG                 BytesPerPixel;
       LONG                 zDepth;
       LONG                 zBitShift;
@@ -80,7 +80,7 @@ typedef struct _T_msiInfo
 // texture mapping with lighting, perspective, decal, etc ...
 //
 typedef struct _T_msiVertex
-   { 
+   {
    float x, y, z, invW, r, g, b, mr, mg, mb, u, v;
 
    } T_msiVertex;
@@ -94,7 +94,7 @@ typedef struct _T_msiParameters
    struct //_msiTexture
       {
       BOOL     Enable;
-      long     Width,         
+      long     Width,
                Height;
       long     Planes;
       LPBYTE   pMem;
@@ -108,14 +108,14 @@ typedef struct _T_msiParameters
          long     CacheOffset;
          } msiLUT;
 
-      BOOL     Clamp_u, 
+      BOOL     Clamp_u,
                Clamp_v;
       BOOL     Modulate;
       BOOL     Decal;
       BOOL     Transparency;
-      WORD     KeyingColor,  
+      WORD     KeyingColor,
                KeyingColorMask;
-      WORD     KeyingAlpha,  
+      WORD     KeyingAlpha,
                KeyingAlphaMask;    // !!! 1 bit value !!!
 
       } msiTexture;
@@ -140,13 +140,13 @@ typedef struct _T_msiParameters
 // Z plane parameters. This structure describes the coordinates and color of
 // a plane when using "msiRenderZPlane" function call.
 //
-typedef struct _T_msiZPlane 
+typedef struct _T_msiZPlane
    {
    long  x, y,             // Plane top-left coordinate
          u, v,             // Texture top-left coordinate
-         xWidth, 
+         xWidth,
          yHeight,          // Plane dimension
-         uWidth, 
+         uWidth,
          vHeight;          // Texture dimension
    float z,                // Plane's depth
          r, g, b,          // Plane's color
@@ -165,13 +165,13 @@ typedef struct _T_msiMemoryStatus
 // for information about the Board.
 //
 typedef struct QueryInfoStruct
-   { 
+   {
    DWORD ErrorStatus;
    DWORD MemorySize;
    } QueryInfoStruct;
 
 // Minimum allowed Size for QueryInfo structure block.
-//   
+//
 #define QueryInfoStructMinSize      8           // Size in bytes
 
 // Possible error codes returned in ErrorStatus
@@ -181,108 +181,108 @@ typedef struct QueryInfoStruct
 #define BOARDNOTSUPPORTED           4
 
 // Function prototypes
-//   
+//
 #ifdef __cplusplus
 
 // Overall functions
 
-   extern "C" LPBYTE			   msiAllocTextureHeap(LONG Pages);
-   extern "C" BOOL			   msiAwake(void);
-   extern "C" BOOL			   msiExit();
-   extern "C" BOOL			   msiFreeTextureHeap(LPBYTE pTextureHeap);
-   extern "C" T_msiInfo*	   msiInit( LONG Width, LONG Height, LONG Planes, BOOL ZBuffer, BOOL Debug, WNDPROC lpWindowProc);
-   extern "C" BOOL			   msiIsMemoryBusy( T_msiMemoryStatus *pMemStatus );   
-   extern "C" BOOL			   msiSleep(void);
+   extern "C" LPBYTE               msiAllocTextureHeap(LONG Pages);
+   extern "C" BOOL             msiAwake(void);
+   extern "C" BOOL             msiExit();
+   extern "C" BOOL             msiFreeTextureHeap(LPBYTE pTextureHeap);
+   extern "C" T_msiInfo*       msiInit( LONG Width, LONG Height, LONG Planes, BOOL ZBuffer, BOOL Debug, WNDPROC lpWindowProc);
+   extern "C" BOOL             msiIsMemoryBusy( T_msiMemoryStatus *pMemStatus );
+   extern "C" BOOL             msiSleep(void);
    extern "C" BOOL            msiQueryInfo(LONG StructSize,LPBYTE StructPointer);
 
 // Frame functions
 
-	extern "C" BOOL			   msiClearBack(float r, float g, float b);
-	extern "C" BOOL			   msiClearFront(float r, float g, float b);
-	extern "C" BOOL			   msiClearZ(float z);
-   extern "C" BOOL			   msiEndFrame(BOOL Dump, LONG Frame, BOOL Wait);
-   extern "C" BOOL			   msiSetParameters(T_msiParameters* pParameters);
-   extern "C" BOOL			   msiStartFrame(BOOL ClearRGB, float r, float g, float b, BOOL ClearZ, float z);
-                              
-// Context Functions          
-                              
-   extern "C" BOOL			   msiSetDepthCompare(DWORD Cmp);
-   extern "C" BOOL			   msiSetDitherEnable(BOOL Dither);
-   extern "C" BOOL			   msiSetTextureBlend(ULONG msiTexBlend);
-   extern "C" BOOL			   msiSetTextureCLUT4(DWORD Offset, DWORD Index );
-   extern "C" BOOL			   msiSetTextureCLUT8(DWORD Offset );
-   extern "C" BOOL			   msiSetTextureEnable(BOOL Enable);
-   extern "C" BOOL			   msiSetTextureOffset(DWORD Offset );
-   extern "C" BOOL			   msiSetTexturePlanes(LONG Planes);
-   extern "C" BOOL			   msiSetTextureSize(LONG Width, LONG Height);
-   extern "C" BOOL			   msiSetTextureTransparency(DWORD MaskKey );
-   extern "C" BOOL			   msiSetTextureWrap(BOOL ClampU, BOOL ClampV);
-                              
-// Rendering functions        
-                              
-   extern "C" BOOL			   msiBlitRect (  LPBYTE Pheap, 
-                                             LPBYTE Pmemory, 
-									                  T_msiMemoryStatus *pMemStatus,
-									                  WORD SourcePitch, WORD SourcePlanes, 
-									                  WORD BlitWidth, WORD BlitHeight, 
-									                  DWORD DestinationOff, 
-									                  DWORD KeyingColor, DWORD KeyingMask );
-   extern "C" BOOL			   msiDrawSingleLine( DWORD color, DWORD XYStart, DWORD XYEnd, DWORD LineStyle );
-   extern "C" BOOL			   msiRenderTriangle(T_msiVertex* pV0, T_msiVertex* pV1, T_msiVertex* pV2, BYTE Opacity);
-   extern "C" BOOL			   msiRenderZPlane(T_msiZPlane* pZPlane, BYTE Opacity);
+    extern "C" BOOL            msiClearBack(float r, float g, float b);
+    extern "C" BOOL            msiClearFront(float r, float g, float b);
+    extern "C" BOOL            msiClearZ(float z);
+   extern "C" BOOL             msiEndFrame(BOOL Dump, LONG Frame, BOOL Wait);
+   extern "C" BOOL             msiSetParameters(T_msiParameters* pParameters);
+   extern "C" BOOL             msiStartFrame(BOOL ClearRGB, float r, float g, float b, BOOL ClearZ, float z);
+
+// Context Functions
+
+   extern "C" BOOL             msiSetDepthCompare(DWORD Cmp);
+   extern "C" BOOL             msiSetDitherEnable(BOOL Dither);
+   extern "C" BOOL             msiSetTextureBlend(ULONG msiTexBlend);
+   extern "C" BOOL             msiSetTextureCLUT4(DWORD Offset, DWORD Index );
+   extern "C" BOOL             msiSetTextureCLUT8(DWORD Offset );
+   extern "C" BOOL             msiSetTextureEnable(BOOL Enable);
+   extern "C" BOOL             msiSetTextureOffset(DWORD Offset );
+   extern "C" BOOL             msiSetTexturePlanes(LONG Planes);
+   extern "C" BOOL             msiSetTextureSize(LONG Width, LONG Height);
+   extern "C" BOOL             msiSetTextureTransparency(DWORD MaskKey );
+   extern "C" BOOL             msiSetTextureWrap(BOOL ClampU, BOOL ClampV);
+
+// Rendering functions
+
+   extern "C" BOOL             msiBlitRect (  LPBYTE Pheap,
+                                             LPBYTE Pmemory,
+                                                      T_msiMemoryStatus *pMemStatus,
+                                                      WORD SourcePitch, WORD SourcePlanes,
+                                                      WORD BlitWidth, WORD BlitHeight,
+                                                      DWORD DestinationOff,
+                                                      DWORD KeyingColor, DWORD KeyingMask );
+   extern "C" BOOL             msiDrawSingleLine( DWORD color, DWORD XYStart, DWORD XYEnd, DWORD LineStyle );
+   extern "C" BOOL             msiRenderTriangle(T_msiVertex* pV0, T_msiVertex* pV1, T_msiVertex* pV2, BYTE Opacity);
+   extern "C" BOOL             msiRenderZPlane(T_msiZPlane* pZPlane, BYTE Opacity);
    extern "C" BOOL            msiSplashScreen(void);
 
 #else
 
 // Overall functions
 
-   LPBYTE		   msiAllocTextureHeap(LONG Pages);
-   BOOL			   msiAwake(void);
-   BOOL			   msiExit();
-   BOOL			   msiFreeTextureHeap(LPBYTE pTextureHeap);
-   T_msiInfo*	   msiInit( LONG Width, LONG Height, LONG Planes, BOOL ZBuffer, BOOL Debug, WNDPROC lpWindowProc);
-   BOOL			   msiIsMemoryBusy( T_msiMemoryStatus *pMemStatus );   
-   BOOL			   msiSleep(void);
+   LPBYTE          msiAllocTextureHeap(LONG Pages);
+   BOOL            msiAwake(void);
+   BOOL            msiExit();
+   BOOL            msiFreeTextureHeap(LPBYTE pTextureHeap);
+   T_msiInfo*      msiInit( LONG Width, LONG Height, LONG Planes, BOOL ZBuffer, BOOL Debug, WNDPROC lpWindowProc);
+   BOOL            msiIsMemoryBusy( T_msiMemoryStatus *pMemStatus );
+   BOOL            msiSleep(void);
    BOOL           msiQueryInfo(LONG StructSize,LPBYTE StructPointer);
 
 // Frame functions
 
-	BOOL			   msiClearBack(float r, float g, float b);
-	BOOL			   msiClearFront(float r, float g, float b);
-	BOOL			   msiClearZ(float z);
-   BOOL			   msiEndFrame(BOOL Dump, LONG Frame, BOOL Wait);
-   BOOL			   msiSetParameters(T_msiParameters* pParameters);
-   BOOL			   msiStartFrame(BOOL ClearRGB, float r, float g, float b, BOOL ClearZ, float z);
+    BOOL               msiClearBack(float r, float g, float b);
+    BOOL               msiClearFront(float r, float g, float b);
+    BOOL               msiClearZ(float z);
+   BOOL            msiEndFrame(BOOL Dump, LONG Frame, BOOL Wait);
+   BOOL            msiSetParameters(T_msiParameters* pParameters);
+   BOOL            msiStartFrame(BOOL ClearRGB, float r, float g, float b, BOOL ClearZ, float z);
 
-// Context Functions 
+// Context Functions
 
-   BOOL			   msiSetDepthCompare(DWORD Cmp);
-   BOOL			   msiSetDitherEnable(BOOL Dither);
-   BOOL			   msiSetTextureBlend(ULONG msiTexBlend);
-   BOOL			   msiSetTextureCLUT4(DWORD Offset, DWORD Index );
-   BOOL			   msiSetTextureCLUT8(DWORD Offset );
-   BOOL			   msiSetTextureEnable(BOOL Enable);
-   BOOL			   msiSetTextureOffset(DWORD Offset );
-   BOOL			   msiSetTexturePlanes(LONG Planes);
-   BOOL			   msiSetTextureSize(LONG Width, LONG Height);
-   BOOL			   msiSetTextureTransparency(DWORD MaskKey );
-   BOOL			   msiSetTextureWrap(BOOL ClampU, BOOL ClampV);
-  
+   BOOL            msiSetDepthCompare(DWORD Cmp);
+   BOOL            msiSetDitherEnable(BOOL Dither);
+   BOOL            msiSetTextureBlend(ULONG msiTexBlend);
+   BOOL            msiSetTextureCLUT4(DWORD Offset, DWORD Index );
+   BOOL            msiSetTextureCLUT8(DWORD Offset );
+   BOOL            msiSetTextureEnable(BOOL Enable);
+   BOOL            msiSetTextureOffset(DWORD Offset );
+   BOOL            msiSetTexturePlanes(LONG Planes);
+   BOOL            msiSetTextureSize(LONG Width, LONG Height);
+   BOOL            msiSetTextureTransparency(DWORD MaskKey );
+   BOOL            msiSetTextureWrap(BOOL ClampU, BOOL ClampV);
+
 // Rendering functions
 
-   BOOL			   msiBlitRect (  LPBYTE Pheap, 
-                                  LPBYTE Pmemory, 
-	 				                  T_msiMemoryStatus *pMemStatus,
-	 				                  WORD SourcePitch, WORD SourcePlanes, 
-	 				                  WORD BlitWidth, WORD BlitHeight, 
-	 				                  DWORD DestinationOff, 
-	 				                  DWORD KeyingColor, DWORD KeyingMask );
-   BOOL			   msiDrawSingleLine( DWORD color, DWORD XYStart, DWORD XYEnd, DWORD LineStyle );
-   BOOL			   msiRenderTriangle(T_msiVertex* pV0, T_msiVertex* pV1, T_msiVertex* pV2, BYTE Opacity);
-   BOOL			   msiRenderZPlane(T_msiZPlane* pZPlane, BYTE Opacity);
+   BOOL            msiBlitRect (  LPBYTE Pheap,
+                                  LPBYTE Pmemory,
+                                      T_msiMemoryStatus *pMemStatus,
+                                      WORD SourcePitch, WORD SourcePlanes,
+                                      WORD BlitWidth, WORD BlitHeight,
+                                      DWORD DestinationOff,
+                                      DWORD KeyingColor, DWORD KeyingMask );
+   BOOL            msiDrawSingleLine( DWORD color, DWORD XYStart, DWORD XYEnd, DWORD LineStyle );
+   BOOL            msiRenderTriangle(T_msiVertex* pV0, T_msiVertex* pV1, T_msiVertex* pV2, BYTE Opacity);
+   BOOL            msiRenderZPlane(T_msiZPlane* pZPlane, BYTE Opacity);
    BOOL           msiSplashScreen(void);
 #endif
-  
+
 #endif // _MSI95_H_
 
 
